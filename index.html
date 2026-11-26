@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MIDNIGHT SOCIETY</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ background:#080b13;color:#f2f4f8;
+ font-family:'DM Sans',sans-serif;
+ overflow-x:hidden;
+}
+#rain{position:fixed;inset:0;z-index:-1;pointer-events:none}
+.bg{
+ position:fixed;inset:0;z-index:-2;
+ background:
+ radial-gradient(ellipse at 15% 20%,#192e48,transparent 45%),
+ radial-gradient(ellipse at 85% 75%,#25203e,transparent 45%),
+ #080b13;
+}
+nav{
+ position:fixed;top:0;width:100%;z-index:10;
+ display:flex;justify-content:space-between;
+ align-items:center;padding:23px 8%;
+ background:rgba(8,11,19,.65);
+ backdrop-filter:blur(15px);
+ border-bottom:1px solid #ffffff12;
+}
+.logo{font-size:18px;font-weight:800;letter-spacing:4px}
+.logo span{color:#85b8ef}
+nav a{
+ color:#aab7c8;text-decoration:none;
+ font-size:12px;margin-left:20px;
+ transition:.3s;
+}
+nav a:hover{color:#85b8ef}
+.hero{
+ min-height:100vh;display:flex;
+ flex-direction:column;align-items:center;
+ justify-content:center;text-align:center;padding:100px 20px;
+}
+.label{color:#85b8ef;letter-spacing:6px;font-size:11px}
+.hero h1{
+ font-size:clamp(50px,10vw,110px);
+ font-weight:800;line-height:1.05;
+ letter-spacing:-5px;margin:30px 0;
+}
+.hero h1 span{
+ color:#85b8ef;font-family:'Playfair Display',serif;
+ font-style:italic;font-weight:600;
+}
+.hero p{color:#9ba9bb;line-height:2;font-size:14px}
+.button{
+ display:inline-block;margin-top:35px;
+ padding:14px 30px;border:1px solid #85b8ef;
+ border-radius:30px;color:white;text-decoration:none;
+ font-size:12px;transition:.3s;
+}
+.button:hover{background:#85b8ef;color:#080b13}
+.clock{margin-top:40px;color:#7f93ad;font-size:12px;letter-spacing:2px}
+
+section{padding:100px 9%}
+.section-label{color:#85b8ef;font-size:11px;letter-spacing:5px;margin-bottom:15px}
+.heading{font:600 clamp(32px,5vw,50px) 'Playfair Display',serif;margin-bottom:15px}
+.sub{color:#8795a8;font-size:13px;line-height:2}
+
+.members{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:25px;margin-top:50px;
+}
+.member{
+ border:1px solid #ffffff19;
+ background:rgba(255,255,255,.045);
+ border-radius:18px;padding:30px;
+ transition:.4s;position:relative;overflow:hidden;
+}
+.member:hover{
+ transform:translateY(-12px);
+ border-color:#85b8ef;
+ background:rgba(133,184,239,.09);
+}
+.member:before{
+ content:"";position:absolute;width:150px;height:150px;
+ background:#85b8ef18;border-radius:50%;
+ top:-80px;right:-60px;filter:blur(20px);
+}
+.avatar{
+ width:105px;height:105px;border-radius:50%;
+ border:2px solid #85b8ef;
+ background:linear-gradient(135deg,#253c58,#111725);
+ display:flex;align-items:center;justify-content:center;
+ font-size:35px;margin-bottom:25px;overflow:hidden;
+}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.member small{color:#85b8ef;letter-spacing:3px}
+.member h3{font:600 26px 'Playfair Display',serif;margin:12px 0}
+.member p{color:#8d9bad;font-size:12px;line-height:1.9}
+.social{
+ display:inline-flex;align-items:center;gap:10px;
+ margin-top:25px;color:#c7d8ec;text-decoration:none;
+ font-size:12px;border:1px solid #ffffff20;
+ padding:11px 15px;border-radius:25px;transition:.3s;
+}
+.social:hover{background:#85b8ef;color:#080b13}
+.social i{font-size:17px}
+
+.about-grid{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:50px;align-items:center;margin-top:40px;
+}
+.about-box{
+ border:1px solid #ffffff19;border-radius:18px;
+ padding:35px;background:#ffffff08;
+}
+.about-box i{font-size:30px;color:#85b8ef;margin-bottom:20px}
+.about-box h3{font:600 25px 'Playfair Display',serif;margin-bottom:15px}
+.about-box p{color:#91a0b3;font-size:13px;line-height:2}
+
+.tech-grid{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:25px;margin-top:45px;
+}
+.tech-card{
+ padding:35px 25px;border:1px solid #ffffff20;
+ border-radius:18px;background:rgba(255,255,255,.05);
+ transition:.4s;
+}
+.tech-card:hover{
+ transform:translateY(-10px);
+ border-color:#85b8ef;
+ box-shadow:0 10px 35px #85b8ef20;
+}
+.tech-card i{font-size:40px;color:#85b8ef;margin-bottom:25px}
+.tech-card h3{font:600 25px 'Playfair Display',serif;margin-bottom:15px}
+.tech-card p{color:#91a0b3;font-size:13px;line-height:2}
+.tech-card span{
+ display:inline-block;margin-top:20px;
+ color:#85b8ef;font-size:11px;letter-spacing:2px;
+}
+.tech-button{
+ margin-top:30px;padding:13px 25px;
+ background:transparent;border:1px solid #85b8ef;
+ color:white;border-radius:30px;cursor:pointer;transition:.3s;
+}
+.tech-button:hover{background:#85b8ef;color:#080b13}
+#tech-info{
+ display:none;margin-top:25px;padding:25px;
+ background:#85b8ef12;border:1px solid #85b8ef50;
+ border-radius:15px;color:#aebed2;line-height:2;font-size:13px;
+}
+.demo-code{
+ margin-top:30px;padding:25px;
+ background:#101725;border:1px solid #ffffff20;
+ border-radius:15px;overflow-x:auto;
+}
+.demo-code h3{color:#85b8ef;margin-bottom:15px}
+.demo-code pre{color:#b9c9dc;font-size:12px;line-height:2}
+
+.gallery{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:15px;margin-top:40px;
+}
+.gallery-item{
+ height:210px;border-radius:14px;
+ background:linear-gradient(135deg,#213b59,#101725);
+ border:1px solid #ffffff20;
+ display:flex;align-items:center;justify-content:center;
+ color:#91a6c0;flex-direction:column;gap:12px;
+ overflow:hidden;transition:.4s;
+}
+.gallery-item img{width:100%;height:100%;object-fit:cover}
+.gallery-item:hover{transform:scale(1.03)}
+.gallery-item i{font-size:28px}
+
+.quote{text-align:center;padding:100px 20px}
+.quote h2{
+ font:italic 600 clamp(25px,5vw,48px) 'Playfair Display',serif;
+ color:#c3d8ef;line-height:1.5;
+}
+.quote p{margin-top:25px;color:#8295ad;font-size:11px;letter-spacing:4px}
+footer{
+ border-top:1px solid #ffffff15;padding:35px 8%;
+ text-align:center;color:#74859c;font-size:11px;letter-spacing:2px;
+}
+footer i{color:#85b8ef}
+
+.reveal{
+ opacity:0;transform:translateY(35px);
+ transition:all .8s ease;
+}
+.reveal.active{opacity:1;transform:translateY(0)}
+
+@media(max-width:750px){
+ nav{padding:18px 5%;flex-wrap:wrap;gap:12px}
+ nav a{margin-left:8px;font-size:9px}
+ .members,.tech-grid{grid-template-columns:1fr}
+ .about-grid{grid-template-columns:1fr}
+ .gallery{grid-template-columns:1fr 1fr}
+ .hero h1{letter-spacing:-2px}
+ section{padding:85px 7%}
+}
+</style>
+</head>
+
+<body>
+<div class="bg"></div>
+<canvas id="rain"></canvas>
+
+<nav>
+ <div class="logo">MIDNIGHT<span>.</span></div>
+ <div>
+  <a href="#home">HOME</a>
+  <a href="#members">MEMBERS</a>
+  <a href="#about">ABOUT</a>
+  <a href="#technology">TECH</a>
+  <a href="#gallery">GALLERY</a>
+ </div>
+</nav>
+
+<div id="home" class="hero">
+ <div class="label">EST. 2026 — THREE INDIVIDUALS</div>
+ <h1>WE ARE<br><span>MIDNIGHT.</span></h1>
+ <p>Different personalities. Different stories.<br>One place where our journey begins.</p>
+ <a href="#members" class="button">DISCOVER OUR WORLD ↗</a>
+ <div class="clock" id="clock">LOADING TIME...</div>
+</div>
+
+<section id="members">
+ <div class="section-label">01 — THE PEOPLE</div>
+ <h2 class="heading">Meet Our Members.</h2>
+ <p class="sub">Three people, three identities, one unforgettable story.</p>
+
+ <div class="members">
+  <div class="member reveal">
+   <div class="avatar"><img src="foto/foto1.jpg" alt="Foto anggota 1"></div>
+   <small>MEMBER / 01</small>
+   <h3>Muhamad Jeni</h3>
+   <p>One of the people behind this little universe. Always creating a new story.</p>
+   <a class="social" href="https://instagram.com/jenichol18" target="_blank">
+    <i class="fa-brands fa-instagram"></i> @jenichol18
+   </a>
+  </div>
+
+  <div class="member reveal">
+   <div class="avatar"><img src="foto/foto2.jpg" alt="Foto anggota 2"></div>
+   <small>MEMBER / 02</small>
+   <h3>Agung Setiawan</h3>
+   <p>A unique personality with a different perspective on everything.</p>
+   <a class="social" href="https://instagram.com/agungss_02" target="_blank">
+    <i class="fa-brands fa-instagram"></i> @agungss_02
+   </a>
+  </div>
+
+  <div class="member reveal">
+   <div class="avatar"><img src="foto/foto3.jpg" alt="Foto anggota 3"></div>
+   <small>MEMBER / 03</small>
+   <h3>Muhamad Bramesta Al ghifari</h3>
+   <p>Another piece of the story that makes this group complete.</p>
+   <a class="social" href="https://instagram.com/_brmsta17" target="_blank">
+    <i class="fa-brands fa-instagram"></i> @_brmsta17
+   </a>
+  </div>
+ </div>
+</section>
+
+<section id="about">
+ <div class="section-label">02 — OUR IDENTITY</div>
+ <h2 class="heading">More Than Just A Group.</h2>
+ <p class="sub">A small introduction to who we are.</p>
+
+ <div class="about-grid">
+  <div class="about-box reveal">
+   <i class="fa-solid fa-moon"></i>
+   <h3>Our Story</h3>
+   <p>Kami adalah tiga individu dengan karakter yang berbeda. Melalui kelompok ini, kami belajar, berkembang, dan menciptakan pengalaman bersama.</p>
+  </div>
+  <div class="about-box reveal">
+   <i class="fa-solid fa-star"></i>
+   <h3>Our Vision</h3>
+   <p>Menjadi kelompok yang kreatif, kompak, saling mendukung, dan selalu memberikan hasil terbaik dalam setiap perjalanan.</p>
+  </div>
+ </div>
+</section>
+
+<section id="technology">
+ <div class="section-label">03 — WEB DEVELOPMENT</div>
+ <h2 class="heading">Built With Technology.</h2>
+ <p class="sub">Three fundamental technologies behind our website.</p>
+
+ <div class="tech-grid">
+  <div class="tech-card reveal">
+   <i class="fa-brands fa-html5"></i>
+   <h3>HTML</h3>
+   <p>HTML (HyperText Markup Language) digunakan untuk membuat struktur website. HTML mengatur judul, paragraf, gambar, tautan, navigasi, dan berbagai elemen halaman.</p>
+   <span>01 — STRUCTURE</span>
+  </div>
+
+  <div class="tech-card reveal">
+   <i class="fa-brands fa-css3-alt"></i>
+   <h3>CSS</h3>
+   <p>CSS (Cascading Style Sheets) digunakan untuk mengatur tampilan website, seperti warna, ukuran teks, jarak, layout, efek hover, animasi, dan desain responsif.</p>
+   <span>02 — DESIGN</span>
+  </div>
+
+  <div class="tech-card reveal">
+   <i class="fa-brands fa-js"></i>
+   <h3>JavaScript</h3>
+   <p>JavaScript digunakan untuk membuat website lebih interaktif, seperti animasi hujan, jam digital, tombol interaktif, dan efek ketika pengunjung menggulir halaman.</p>
+   <span>03 — INTERACTION</span>
+  </div>
+ </div>
+
+ <div style="text-align:center">
+  <button class="tech-button" onclick="showTech()">EXPLORE THE TECHNOLOGY ↗</button>
+ </div>
+
+ <div id="tech-info">
+  <h3 style="color:#85b8ef;margin-bottom:12px">HOW THIS WEBSITE WORKS</h3>
+  <p>HTML menjadi fondasi dan struktur website. CSS memperindah tampilan melalui warna, layout, dan animasi. JavaScript memberikan fungsi interaktif sehingga website dapat merespons aktivitas pengunjung.</p>
+  <p style="margin-top:12px">Ketiga teknologi tersebut bekerja sama untuk menghasilkan website MIDNIGHT SOCIETY.</p>
+ </div>
+
+ <div class="demo-code">
+  <h3><i class="fa-solid fa-code"></i> SIMPLE CODE EXAMPLE</h3>
+  <pre>
+HTML:
+&lt;h1&gt;Hello Midnight Society&lt;/h1&gt;
+
+CSS:
+h1 {
+  color: #85b8ef;
+  text-align: center;
+}
+
+JavaScript:
+alert("Welcome to Midnight Society!");
+  </pre>
+ </div>
+</section>
+
+<div class="quote">
+ <h2>"The best stories<br>are never written alone."</h2>
+ <p>THREE MINDS · ONE JOURNEY</p>
+</div>
+
+<footer>
+ © 2026 MIDNIGHT SOCIETY — MADE WITH <i class="fa-solid fa-heart"></i>
+</footer>
+
+<script>
+// RAIN ANIMATION
+const canvas=document.getElementById("rain");
+const ctx=canvas.getContext("2d");
+let drops=[],w,h;
+
+function resize(){
+ w=canvas.width=innerWidth;
+ h=canvas.height=innerHeight;
+ drops=Array.from({length:220},()=>({
+  x:Math.random()*w,
+  y:Math.random()*h,
+  speed:Math.random()*6+3,
+  length:Math.random()*20+10
+ }));
+}
+
+function draw(){
+ ctx.clearRect(0,0,w,h);
+ ctx.strokeStyle="rgba(150,190,230,.35)";
+ ctx.lineWidth=1;
+ ctx.beginPath();
+
+ for(const d of drops){
+  ctx.moveTo(d.x,d.y);
+  ctx.lineTo(d.x-2,d.y+d.length);
+  d.y+=d.speed;
+  d.x-=.7;
+  if(d.y>h){
+   d.y=-25;
+   d.x=Math.random()*w;
+  }
+ }
+ ctx.stroke();
+ requestAnimationFrame(draw);
+}
+
+window.addEventListener("resize",resize);
+resize();
+draw();
+
+// DIGITAL CLOCK
+function updateClock(){
+ const now=new Date();
+ document.getElementById("clock").textContent=
+ now.toLocaleDateString("id-ID",{
+  weekday:"long",day:"numeric",month:"long",year:"numeric"
+ })+" — "+now.toLocaleTimeString("id-ID");
+}
+updateClock();
+setInterval(updateClock,1000);
+
+// TECHNOLOGY BUTTON
+function showTech(){
+ const info=document.getElementById("tech-info");
+ info.style.display=
+ info.style.display==="block"?"none":"block";
+}
+
+// SCROLL REVEAL
+const observer=new IntersectionObserver((entries)=>{
+ entries.forEach(entry=>{
+  if(entry.isIntersecting){
+   entry.target.classList.add("active");
+  }
+ });
+},{threshold:0.15});
+
+document.querySelectorAll(".reveal").forEach(element=>{
+ observer.observe(element);
+});
+</script>
+
+</body>
+</html>
